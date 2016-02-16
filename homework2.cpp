@@ -7,7 +7,7 @@
 #include <string>
 using namespace std;
 
-
+//Comment for Main method
 int main()
 {
   while ( true )
