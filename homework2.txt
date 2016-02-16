@@ -63,7 +63,8 @@ int main()
 		}
 	      else if (kidpid == 0)
 		{
-		  // I am the child.
+		  // I am the child. Execute the inputted program here.
+                  cout << "Executing a child......\n";
 		  execvp (prog, argv);
 		  
 		  // The following lines should not happen (normally).
@@ -72,10 +73,11 @@ int main()
 		}
 	      else
 		{
-		  // I am the parent.  Wait for the child.
+		  // I am the parent.  Wait for the child to finish before showing "$".
 		  if ( waitpid( kidpid, 0, 0 ) < 0 )
 		    {
 		      perror( "Internal error: cannot wait for child." );
+                      cout << "Executing a parent.....\n";
 		      return -1;
 		    }
 		}
