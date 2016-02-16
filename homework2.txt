@@ -2,9 +2,11 @@
 #include <sys/types.h>  // type definitions, e.g., pid_t
 #include <sys/wait.h>   // wait()
 #include <signal.h>     // signal name constants and kill()
+#include <stdio.h>
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstring>
 using namespace std;
 
 //Comment for Main method
