@@ -15,7 +15,7 @@ int main()
   while ( true )
     {
       // Show prompt.
-      cout << get_current_dir_name () << "$ " ;
+      cout << get_current_dir_name () << "]$ " ;
       char command[256];
       cin.getline( command, 256 );
       
@@ -40,7 +40,7 @@ int main()
 	}
       else
 	{
-	  if (!strcmp (prog, "cd"))
+	  if (strcmp (prog, "cd") == 0)
 	    {
 	      if (argv[1] == NULL)
 		{
