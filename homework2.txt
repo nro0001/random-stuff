@@ -74,10 +74,10 @@ int main()
 	      else
 		{
 		  // I am the parent.  Wait for the child to finish before showing "$".
-		  if ( waitpid( kidpid, 0, 0 ) < 0 )
+		  cout << "Executing a parent.....\n";
+                  if ( waitpid( kidpid, 0, 0 ) < 0 )
 		    {
 		      perror( "Internal error: cannot wait for child." );
-                      cout << "Executing a parent.....\n";
 		      return -1;
 		    }
 		}
