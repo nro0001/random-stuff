@@ -3,6 +3,7 @@
 #include <sys/wait.h>   // wait()
 #include <signal.h>     // signal name constants and kill()
 #include <iostream>
+#include <cstdio>
 #include <vector>
 #include <string>
 #include <cstring>
