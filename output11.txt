@@ -1,0 +1,63 @@
+ls: >: No such file or directory
+-rw-------  1 nopenshaw  staff  0 Feb 17 01:54 output11.txt
+
+/users/nopenshaw/desktop/:
+total 234552
+-rw-r--r--@  1 nopenshaw  staff    1824848 Dec  2  2014 0ad
+drwx------  13 nopenshaw  staff        442 Apr 13  2013 360ControllerSource
+drwxr-xr-x   3 nopenshaw  staff        102 May  5  2015 7 Days to Die.app
+-rw-r--r--@  1 nopenshaw  staff       8538 Nov  9 00:11 AULab Equalizer.trak
+drwxr-xr-x@  3 nopenshaw  staff        102 Dec 15  2011 ArgoUML.app
+drwxrwxrwx@  3 nopenshaw  admin        102 Feb 11  2015 Battery Saves copy
+drwxr-xr-x   7 nopenshaw  staff        238 Feb 16 14:23 COMP3500 - OS
+drwxr-xr-x   4 nopenshaw  staff        136 Jan 26 22:15 COMP3710
+drwxr-xr-x  15 nopenshaw  staff        510 Feb 15 01:07 COMP4710 senior design
+drwxr-xr-x   4 nopenshaw  staff        136 Feb  2 12:39 COMP5700
+drwxr-xr-x   2 nopenshaw  staff         68 Jan 25 09:37 COMP5700 - Software Design
+drwxr-xr-x   6 nopenshaw  staff        204 Feb 10 13:34 COMP5710 - SQA
+-rw-r--r--@  1 nopenshaw  staff    1586172 Dec  1 21:28 DocNote11-30-15.JPG
+-rw-r--r--@  1 nopenshaw  staff     143890 Dec  1 21:33 DocNote11-30-15PDF.pdf
+drwxr-xr-x   3 nopenshaw  staff        102 Jul 13  2014 Duke Nukem 3D Megaton Edition.app
+drwxr-xr-x   2 nopenshaw  staff         68 Jan 13 12:08 ENGR2100 - Fund of Eng
+drwxr-xr-x   3 nopenshaw  staff        102 Oct 16  2011 EasyCapViewer.app
+drwxr-xr-x   4 nopenshaw  staff        136 Jan 26 22:24 Eclipse - ADT
+drwxrwxrwx  52 nopenshaw  staff       1768 Jul  5  2015 Empire Earth II Gold (JAKE)
+-rw-r--r--@  1 nopenshaw  staff  110015768 Feb 16  2015 Essentials of Geology 11th ed. (intro txt) - F. Lutgens, et al., (Pearson, 2012) BBS.pdf
+drwxrwxr-x   3 root       admin        102 Dec  3  2014 Keynote.app
+drwxr-xr-x   6 nopenshaw  staff        204 Apr  1  2014 Movies
+drwx------   7 nopenshaw  staff        238 Feb 27  2014 Nicholas Openshaw - Unofficial Transcript
+-rw-r--r--   1 nopenshaw  staff    1359809 Feb 27  2014 Nicholas Openshaw - Unofficial Transcript.zip
+-rw-r--r--@  1 nopenshaw  staff     103259 May 26  2015 Nicholas_Openshaw_Unofficial_Transcript.pdf
+-rw-r--r--@  1 nopenshaw  staff      75936 May 14  2015 Nick Openshaw Academic Transcript.pdf
+drwx------  30 nopenshaw  staff       1020 Feb 11  2014 Nick Openshaw Unofficial transcript (chrome)_files
+drwxr-xr-x  12 nopenshaw  staff        408 Sep  1 11:39 NintendoDS
+drwxrwxr-x   3 root       admin        102 Dec  3  2014 Numbers.app
+drwxr-xr-x   3 nopenshaw  staff        102 Jul 26  2014 Only If.app
+drwxr-xr-x   3 nopenshaw  staff        102 Jul 19  2014 POSTAL 2.app
+drwxrwxr-x   3 root       admin        102 Dec  3  2014 Pages.app
+drwxr-xr-x  29 nopenshaw  staff        986 Feb 14 22:22 Past Classes
+drwxr-xr-x   4 nopenshaw  staff        136 Dec 28 15:01 QuadCopter Drone Media
+-rw-r--r--@  1 nopenshaw  staff    1117304 Dec 31  2014 Radiant Defense
+-rw-r--r--@  1 nopenshaw  staff     266501 Feb 17  2015 Resume.pages
+-rw-r--r--@  1 nopenshaw  staff      67502 Feb 17  2015 Resume.pdf
+-rw-r--r--@  1 nopenshaw  staff      76546 Feb  5  2013 ResumePDF.pdf
+drwx------   3 nopenshaw  staff        102 Nov 29  2013 RuneScape.app
+-rw-r--r--@  1 nopenshaw  staff    1540960 Dec  4  2014 Safari
+drwxr-xr-x   3 nopenshaw  staff        102 Jul 13  2014 Serious Sam 3 BFE.app
+drwxr-xr-x   3 nopenshaw  staff        102 Jul 13  2014 Shadow Warrior Classic Redux.app
+-rw-r--r--@  1 nopenshaw  staff     314168 Dec  4  2014 Steam
+drwxr-xr-x   6 nopenshaw  staff        204 Apr  1  2014 Taxes
+drwxr-xr-x   7 nopenshaw  staff        238 Apr  1  2014 Textbooks
+drwxr-xr-x   3 nopenshaw  staff        102 Jun 22  2014 The Stanley Parable.app
+drwxr-xr-x   3 nopenshaw  staff        102 Jun 22  2014 The Walking Dead Season Two.app
+drwxr-xr-x   3 nopenshaw  staff        102 Oct 10  2012 The Walking Dead.app
+-rw-r--r--@  1 nopenshaw  staff     252450 Nov 11  2014 TigerCard and Tiger Club Account - Receipt.webarchive
+drwxr-xr-x   6 nopenshaw  staff        204 Mar 12  2013 TorBrowser_en-US.app
+drwxr-xr-x   5 nopenshaw  staff        170 Nov 13  2014 Tutoring
+-rw-rw-rw-@  1 nopenshaw  staff    1295316 Feb 17  2015 Visual Boy Advance copy
+drwxr-xr-x   3 nopenshaw  staff        102 May 31  2015 Wargame Red Dragon.app
+drwx------@  7 nopenshaw  staff        238 Feb 14 22:11 haxm-macosx_v6_0_1
+drwxrwxr-x   3 nopenshaw  staff        102 Oct  7  2013 jGRASP.app
+drwxr-xr-x  14 nopenshaw  staff        476 Feb 17 01:54 random-stuff
+drwxr-xr-x  25 nopenshaw  staff        850 Apr  3  2013 temp
+-rw-r--r--@  1 nopenshaw  staff        117 Apr 13  2015 testfile.txt
