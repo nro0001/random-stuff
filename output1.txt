@@ -1,0 +1,16 @@
+ls: >: No such file or directory
+-rw-------  1 nopenshaw  staff  0 Feb 17 20:06 output1.txt
+
+/Users/nopenshaw/Desktop/random-stuff:
+total 216
+-rwxr-xr-x  1 nopenshaw  staff  26316 Feb 17 19:37 h
+-rw-r--r--@ 1 nopenshaw  staff   5860 Feb 17 20:03 homework2.cpp
+-rwxr-xr-x  1 nopenshaw  staff  26316 Feb 17 20:04 homework2.out
+-rw-r--r--@ 1 nopenshaw  staff   5860 Feb 17 20:03 homework2.txt
+-rw-------  1 nopenshaw  staff     33 Feb 17 20:06 output1.txt
+-rw-r--r--  1 nopenshaw  staff     93 Feb 17 19:37 output10.txt
+-rw-r--r--  1 nopenshaw  staff   4577 Feb 17 19:37 output11.txt
+-rw-------  1 nopenshaw  staff     92 Feb 17 19:48 output2.txt
+-rw-r--r--  1 nopenshaw  staff   4575 Feb 17 19:37 output5.txt
+-rw-r--r--  1 nopenshaw  staff    627 Feb 17 19:37 output6.txt
+-rw-r--r--  1 nopenshaw  staff     93 Feb 17 19:37 output7.txt

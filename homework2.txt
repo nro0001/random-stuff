@@ -1,12 +1,11 @@
 //Created by: Nick Openshaw
 //Auburn University - COMP3500
 
-#include <unistd.h>     // getpid(), getcwd()
-#include <sys/types.h>  // type definitions, e.g., pid_t
-#include <sys/wait.h>   // wait()
-#include <signal.h>     // signal name constants and kill()
+#include <unistd.h> 
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
 #include <sys/stat.h>
-
 #include <fcntl.h> 
 #include <iostream>
 #include <fstream>
@@ -14,15 +13,17 @@
 #include <vector>
 #include <string>
 #include <cstring>
+
 using namespace std;
 
-//Comment for Main method
+//Main method
 int main()
 {
   while ( true )
     {
-      // Show prompt.
+      // Early show prompt. Replaced by 'currdir'
       //cout << get_current_dir_name () << "]$ " ;
+
       char buffer[100];
       char *answer = getcwd(buffer, sizeof(buffer));
       string currdir;
@@ -30,10 +31,15 @@ int main()
         {
            currdir = answer;
         }
+
+      //Show prompt.
       cout << currdir << "]$ " ;
       char command[256];
+
+      //Get command.
       cin.getline( command, 256 );
-      
+
+      //Arrange and store arguments.
       vector<char*> args;
       char* prog = strtok( command, " " );
       char* tmp = prog;
@@ -51,6 +57,8 @@ int main()
       
       argv[args.size()] = NULL;
       
+
+      //Process arguments.
       //Check entered command for exit condition
       if ( strcmp( command, "exit" ) == 0 )
 	{
@@ -74,8 +82,8 @@ int main()
 		{
 		  int status = chdir (argv[1]);
                   if(status != 0)
+                      //Error changing directory.
                       perror (command);
-//                currdir = $CWD + argv[1];
                   
 		}    
 	    }
@@ -90,11 +98,12 @@ int main()
 
 	      if (kidpid < 0)
 		{
-		  perror( "Internal error: cannot fork." );
+		  perror( "Error forking. Ending program." );
 		  return -1;
 		}
 	      else if (kidpid == 0)
 		{
+                  //COUT TESTS
 		  // I am the child. Execute the inputted program here.
                   //cout << "Executing a child 1......before execvp\n";
                   //cout << "Executing from command......" << *prog << "\n";
@@ -106,7 +115,7 @@ int main()
 		  //for ( int i = 0; i < numstrings; i++ )
                   //    cout << "New Arguments to pass to child 1 process: " << newargs[i] << "\n";
 		  
-
+                  //THOUGHT ABOUT USING OFSTREAM - MAYBE IN FUTURE
                   //ofstream myfile;
                   //myfile.open ("output.txt");
                   //myfile << "Writing this to a file.\n";
@@ -126,23 +135,33 @@ int main()
                         close(fd);
 
                         execvp (prog, argv);
-		        cout << "Executing a child 1......after execvp\n";
+
+		        //cout << "Executing a child 1......after execvp\n";
+
+                        // Following lines should never be reached. execvp() loops program
+		        perror( command );
+		        return -1;
                      }
                   else
                      {
+                        // Error opening file.
 		        perror( command );
                      }
 		}
 	      else
 		{
+                  //COUT TESTS
 		  // I am the parent.  Wait for the child to finish before showing "$".
 		  //cout << "Executing a parent.....before wait\n";
+
                   if ( waitpid( kidpid, 0, 0 ) < 0 )
 		    {
-		      perror( "Internal error: cannot wait for child." );
+		      perror( "Error while waiting for child. Ending program." );
 		      return -1;
 		    }
+
                   //cout << "Executing a parent.....after wait\n";
+
 		}
               
             }
@@ -157,7 +176,7 @@ int main()
 
 	      if (kidpid < 0)
 		{
-		  perror( "Internal error: cannot fork." );
+		  perror( "Error forking. Ending program." );
 		  return -1;
 		}
 	      else if (kidpid == 0)
@@ -166,6 +185,7 @@ int main()
                   //cout << "Executing a child 2......before execvp\n";
                   //cout << "Executing from command......" << *prog << "\n";
 
+                  //TRIED TO FILTER PARAMETERS HERE USING ANOTHER SET OF POINTERS - MAYBE FUTURE
                   //char** newargs = new char*[numstrings];
                   //for ( int k = 0; k < numstrings; k++ )
                   //     newargs[k] = argv[k+1];
@@ -174,9 +194,10 @@ int main()
                   //     cout << "New Arguments to pass to child 2 process: " << newargs[i] << "\n";
 
 		  execvp (prog, argv);
+
 		  //cout << "Executing a child 2......after execvp\n";
 
-		  // The following lines should not happen (normally).
+		  // Following lines should never be reached. execvp() loops program
 		  perror( command );
 		  return -1;
 		}
@@ -185,7 +206,7 @@ int main()
 		  // I am the parent.  Wait for the child to finish before showing "$".
                   if ( waitpid( kidpid, 0, 0 ) < 0 )
 		    {
-		      perror( "Internal error: cannot wait for child." );
+		      perror( "Error while waiting for child. Ending program." );
 		      return -1;
 		    }
 		}
