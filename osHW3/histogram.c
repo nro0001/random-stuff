@@ -27,6 +27,14 @@ typedef struct
     long *count;           /* Pixel counts (one count per bucket) */
 } histogram_t;
 
+/* Struct for serial histogram function */
+typedef struct
+{
+    image_t *image;
+    int buckets;
+    histogram_t *histogram;
+} args_t;
+
 /*
  * Computes a histogram for the given image, with the given number of buckets,
  * storing the result in the given histogram structure.
@@ -89,10 +97,61 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-int compute_histogram(image_t *image, int num_buckets, histogram_t *histogram)
+histogram_t compute_histogram(image_t *image, int num_buckets, histogram_t *histogram)
 {
     int bucket, i;
     size_t size;
+
+    if ((image->maxg + 1) % num_buckets != 0)
+    {
+        fprintf(stderr,
+                "%d gray values cannot be evenly divided into %d buckets\n",
+                image->maxg + 1,
+                num_buckets);
+        return histogram;
+    }
+
+    histogram->num_buckets = num_buckets;
+
+    /* If the histogram contains 4 buckets and gray values are in the range
+       0..255, then there are 256 possible gray values, so 256/4 = 64 values
+       are assigned to each bucket. */
+    histogram->grays_per_bucket = (image->maxg + 1) / num_buckets;
+
+    /* The histogram->count array contains one long value for each bucket */
+    size = num_buckets * sizeof(long);
+    histogram->count = (long *)malloc(size);
+    if (histogram->count == NULL)
+    {
+        perror("malloc");
+        return histogram;
+    }
+
+    /* Initialize all of the counts to zero */
+    memset(histogram->count, 0, size);
+
+    /* For each pixel, increment the count for the corresponding bucket */
+    for (i = 0; i < image->xsize * image->ysize; i++)
+    {
+        bucket = image->data[i] / histogram->grays_per_bucket;
+        histogram->count[bucket]++;
+    }
+
+    return histogram;
+}
+
+int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram)
+{
+    int bucket, i, num_pixels, num_threads, num_per_thread;
+    size_t size;
+
+    num_threads = 4;
+    num_pixels = (image->xsize)*(image->ysize);
+    num_per_thread = num_pixels / 4;
+
+    args_t *hist_args;
+
+    pthread_t thread[num_threads]
 
     if ((image->maxg + 1) % num_buckets != 0)
     {
@@ -122,14 +181,47 @@ int compute_histogram(image_t *image, int num_buckets, histogram_t *histogram)
     /* Initialize all of the counts to zero */
     memset(histogram->count, 0, size);
 
-    /* For each pixel, increment the count for the corresponding bucket */
-    for (i = 0; i < image->xsize * image->ysize; i++)
+    for(int i = 0; i < num_threads; i++)
     {
-        bucket = image->data[i] / histogram->grays_per_bucket;
-        histogram->count[bucket]++;
-    }
+        hist_args = (args_t *)malloc(sizeof(args_t))
+        
+        hist_args->image = image;
+        hist_args->buckets = num_buckets;
+        hist_args->histogram = histogram;
 
+        /* spawn thread */
+	if( (pthread_create (&thread[i], NULL, histogram_thread, (void *)hist_args)) != 0)
+	{
+		printf("Error: could not create thread! Exiting.\n");
+		exit(-1);
+	}
+
+
+    }
+    /* wait for all threads to return before proceeding */
+    for(int i = 0; i < num_threads; i++)
+    {
+	pthread_join( thread[i], NULL );
+    }
     return 1;
+
+
+}
+
+void *histogram_thread(void *args_in)
+{
+
+    args_t *hist_args = (args_t *)args_in;
+
+    hist_args->image = args_in->image;
+    hist_args->buckets = args_in->buckets;
+    hist_args->histogram = args_in->histogram;
+
+    histogram_t temp_hist = compute_histogram(hist_args->image, hist_args->buckets, hist_args->histogram);
+
+    histogram += temp_hist;
+
+    pthread_exit(0);
 }
 
 void print_histogram(histogram_t *histogram)
