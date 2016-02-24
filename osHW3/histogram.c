@@ -212,7 +212,7 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
     /* Initialize all of the counts to zero */
     memset(histogram->count, 0, size);
     
-    int thread_id = 0;
+    int thread_id = 1;
     printf("Starting thread loop....\n");
     for(thread_id; thread_id < num_threads; thread_id++)
     {
