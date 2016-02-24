@@ -237,7 +237,7 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
     int floops = 0;
     for(floops; i < num_threads; floops++)
     {
-	pthread_join( thread[floops], NULL );
+	pthread_join( thread[floops]);
     }
     return 1;
 
