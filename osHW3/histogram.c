@@ -214,7 +214,7 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
     
     int thread_id = 1;
     printf("Starting thread loop....\n");
-    for(thread_id; thread_id < num_threads; thread_id++)
+    for(thread_id; thread_id <= num_threads; thread_id++)
     {
         hist_args = (args_t *)malloc(sizeof(args_t));
         
@@ -235,11 +235,12 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
     /* wait for all threads to return before proceeding */
     printf("Start Joining Threads\n");
     int floops = 1;
-    
-    for(floops; i < num_threads; floops++)
+    void* ret = NULL;
+    for(floops; i <= num_threads; floops++)
     {
 	printf("JOINING.....");
-	pthread_join( thread[floops], NULL);
+	pthread_join( thread[floops], &ret);
+        
     }
     return 1;
 
