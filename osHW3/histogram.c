@@ -233,6 +233,7 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
 
     }
     /* wait for all threads to return before proceeding */
+    printf("Joining threads....\n");
     int floops = 0;
     for(floops; i < num_threads; floops++)
     {
