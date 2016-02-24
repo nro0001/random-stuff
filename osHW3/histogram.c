@@ -109,6 +109,15 @@ int main(int argc, char **argv) {
                 stop_time - start_time);
     }
 
+    start_time = omp_get_wtime();
+    if (compute_with_threads(&image, num_buckets, &histogram))
+    {
+        stop_time = omp_get_wtime();
+        print_histogram(&histogram);
+        fprintf(stderr, "Time to compute histogram: %1.3f seconds\n",
+                stop_time - start_time);
+    }
+
     /* Free heap-allocated memory (mostly to keep valgrind quiet) */
     free(image.data);
     free(histogram.count);
