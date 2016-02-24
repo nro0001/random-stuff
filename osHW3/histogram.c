@@ -161,7 +161,7 @@ int compute_histogram(image_t *image, int num_buckets, histogram_t *histogram)
 
 int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram)
 {
-    int bucket, i, num_pixels, num_threads, num_per_thread;
+    int bucket, i, num_pixels, num_threads, pixels_per_thread;
     size_t size;
 
     num_threads = 4;
@@ -206,9 +206,9 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
     {
         hist_args = (args_t *)malloc(sizeof(args_t));
         
-        hist_args->image = &image;
+        hist_args->image = image;
         hist_args->buckets = num_buckets;
-        hist_args->histogram = &histogram;
+        hist_args->histogram = histogram;
 
         /* spawn thread */
 	if( (pthread_create (&thread[i], NULL, histogram_thread, (void *)hist_args)) != 0)
@@ -220,9 +220,10 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
 
     }
     /* wait for all threads to return before proceeding */
-    for(int i = 0; i < num_threads; i++)
+    int floops = 0;
+    for(floops; i < num_threads; floops++)
     {
-	pthread_join( thread[i], NULL );
+	pthread_join( thread[floops], NULL );
     }
     return 1;
 
@@ -237,10 +238,6 @@ void *histogram_thread(void *args_in)
     hist_args->image = args_in->image;
     hist_args->buckets = args_in->buckets;
     hist_args->histogram = args_in->histogram;
-
-    histogram_t temp_hist = compute_histogram(hist_args->image, hist_args->buckets, hist_args->histogram);
-
-    histogram += temp_hist;
 
     pthread_exit(0);
 }
