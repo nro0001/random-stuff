@@ -213,7 +213,7 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
     memset(histogram->count, 0, size);
     
     int thread_id = 0;
-
+    printf("Starting thread loop....\n");
     for(thread_id; thread_id < num_threads; thread_id++)
     {
         hist_args = (args_t *)malloc(sizeof(args_t));
@@ -223,6 +223,7 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
         hist_args->histogram = histogram;
 
         /* spawn thread */
+        printf("Creating thread....\n");
 	if( (pthread_create (&thread[i], NULL, histogram_thread, (void *)hist_args)) != 0)
 	{
 		printf("Error: could not create thread! Exiting.\n");
