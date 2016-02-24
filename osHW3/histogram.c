@@ -1,6 +1,8 @@
 //Nick Openshaw
 //COMP3500
-//PARALLELIZED THREAD DESCRIPTION
+//This code achieves parallelism by dividing the total number of pixels by 4, assigning a range of pixels to 
+//1 of 4 threads, calculating the histogram for that range, returning the 1/4 histogram, and merging all 4 
+//of the 1/4 histograms into a global histogram.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -98,8 +100,8 @@ int main(int argc, char **argv) {
     fprintf(stderr, "Reading PGM file...\n");
     pgma_read(filename, &image.xsize, &image.ysize, &image.maxg, &image.data);
 
-    /* Compute the histogram and report the amount of elapsed time */
-    fprintf(stderr, "Computing histogram...\n");
+    /* Compute the histogram and report the amount of elapsed time
+    fprintf(stderr, "Computing Histogram...\n");
     start_time = omp_get_wtime();
     if (compute_histogram(&image, num_buckets, &histogram))
     {
@@ -108,9 +110,10 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Time to compute histogram: %1.3f seconds\n",
                 stop_time - start_time);
     }
-    /* Free heap-allocated memory (mostly to keep valgrind quiet) */
+    //Free heap-allocated memory (mostly to keep valgrind quiet)
     free(image.data);
     free(histogram.count);
+    */
 
     start_time = omp_get_wtime();
     if (compute_with_threads(&image, num_buckets, &histogram))
@@ -240,7 +243,7 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
     {
 	printf("JOINING.....");
 	pthread_join( thread[floops], &ret);
-        
+        //Join all 1/4 histograms into main histogram
     }
     return 1;
 
@@ -252,6 +255,9 @@ void *histogram_thread(void *args_in)
 
     args_t *hist_args = (args_t *)args_in;
 
+
+    //Compute histogram for 1/4 pixels here
+    //Return arguments for histogram
 
     return (void *) hist_args;
 }
