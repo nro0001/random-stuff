@@ -236,7 +236,7 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
     printf("Start Joining Threads\n");
     int floops = 1;
     void* ret = NULL;
-    for(floops; i <= num_threads; floops++)
+    for(floops; i <= 4; floops++)
     {
 	printf("JOINING.....");
 	pthread_join( thread[floops], &ret);
@@ -253,7 +253,7 @@ void *histogram_thread(void *args_in)
     args_t *hist_args = (args_t *)args_in;
 
 
-    pthread_exit();
+    return (void *) hist_args;
 }
 
 void print_histogram(histogram_t *histogram)
