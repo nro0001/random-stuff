@@ -235,9 +235,9 @@ void *histogram_thread(void *args_in)
 
     args_t *hist_args = (args_t *)args_in;
 
-    hist_args->image = args_in->image;
-    hist_args->buckets = args_in->buckets;
-    hist_args->histogram = args_in->histogram;
+    hist_args->image = args_in.image;
+    hist_args->buckets = args_in.buckets;
+    hist_args->histogram = args_in.histogram;
 
     pthread_exit(0);
 }
