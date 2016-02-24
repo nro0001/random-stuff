@@ -44,13 +44,32 @@ typedef struct
 int compute_histogram(image_t *image, int buckets, histogram_t *histogram);
 
 /*
+ * Computes a histogram for the given image, with the given number of buckets,
+ * storing the result in the given histogram structure.
+ *
+ * Returns 1 on success and 0 on failure.
+ */
+int compute_with_threads(image_t *image, int buckets, histogram_t *histogram);
+
+/*
+*Thread function for compute_with_threads
+*/
+void *histogram_thread(void *args_in);
+
+/*
  * Displays the given histogram in a human-readable form.
  */
 void print_histogram(histogram_t *histogram);
 
+//histogram_t global_histogram;
+
 int main(int argc, char **argv) {
     image_t image;
     histogram_t histogram;
+    histogram_t histogram1;
+    histogram_t histogram2;
+    histogram_t histogram3;
+    histogram_t histogram4;
     char *filename;
     int num_buckets;
     double start_time, stop_time;
@@ -97,7 +116,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-histogram_t compute_histogram(image_t *image, int num_buckets, histogram_t *histogram)
+int compute_histogram(image_t *image, int num_buckets, histogram_t *histogram)
 {
     int bucket, i;
     size_t size;
@@ -108,7 +127,7 @@ histogram_t compute_histogram(image_t *image, int num_buckets, histogram_t *hist
                 "%d gray values cannot be evenly divided into %d buckets\n",
                 image->maxg + 1,
                 num_buckets);
-        return histogram;
+        return 0;
     }
 
     histogram->num_buckets = num_buckets;
@@ -124,7 +143,7 @@ histogram_t compute_histogram(image_t *image, int num_buckets, histogram_t *hist
     if (histogram->count == NULL)
     {
         perror("malloc");
-        return histogram;
+        return 0;
     }
 
     /* Initialize all of the counts to zero */
@@ -137,7 +156,7 @@ histogram_t compute_histogram(image_t *image, int num_buckets, histogram_t *hist
         histogram->count[bucket]++;
     }
 
-    return histogram;
+    return 1;
 }
 
 int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram)
@@ -147,11 +166,11 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
 
     num_threads = 4;
     num_pixels = (image->xsize)*(image->ysize);
-    num_per_thread = num_pixels / 4;
+    pixels_per_thread = num_pixels / 4;
 
     args_t *hist_args;
 
-    pthread_t thread[num_threads]
+    pthread_t thread[num_threads];
 
     if ((image->maxg + 1) % num_buckets != 0)
     {
@@ -180,14 +199,16 @@ int compute_with_threads(image_t *image, int num_buckets, histogram_t *histogram
 
     /* Initialize all of the counts to zero */
     memset(histogram->count, 0, size);
+    
+    int thread_id = 0;
 
-    for(int i = 0; i < num_threads; i++)
+    for(thread_id; thread_id < num_threads; thread_id++)
     {
-        hist_args = (args_t *)malloc(sizeof(args_t))
+        hist_args = (args_t *)malloc(sizeof(args_t));
         
-        hist_args->image = image;
+        hist_args->image = &image;
         hist_args->buckets = num_buckets;
-        hist_args->histogram = histogram;
+        hist_args->histogram = &histogram;
 
         /* spawn thread */
 	if( (pthread_create (&thread[i], NULL, histogram_thread, (void *)hist_args)) != 0)
